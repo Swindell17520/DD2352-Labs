@@ -17,5 +17,6 @@ def Coins(n):
         return float('inf')
     else:
         return min(n,1+Coins(n-a),1+Coins(n-b),1+Coins(n-c))
+Coins(n)
     
     
