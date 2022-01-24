@@ -6,10 +6,10 @@ Created on Mon Jan 24 14:06:48 2022
 """
 import sys
 sys.setrecursionlimit(100000)
-n = 10
-a = 5
-b =6
-c = 7
+n = int(input())
+a = int(input())
+b = int(input())
+c = int(input())
 def Coins(n):
     if n == 0:
         return 0
