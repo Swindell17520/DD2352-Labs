@@ -1,24 +1,25 @@
 import sys
 import timeit
-sys.setrecursionlimit(100000)
-n = int(input())
-k = int(input())
-p = float(input())
+sys.setrecursionlimit(10000000)
+n = 4800
+k = round(n/2,0)
+p = 0.99
+y = k
 dp = {}
 start = timeit.default_timer()
-def Win_Streak(n,k):
-    if n and k in dp:
-        return dp[n][k]
-    elif k == 0:
+def Win_Streak(x,y):
+    if (x,y) in dp:
+        return dp[(x,y)]
+    elif y == 0:
         return 1.0
-    elif n == 0 and k > 0:
+    elif x == 0 and y > 0:
         return 0.0
     else:
-        dp[n][k] = p*Win_Streak(n-1,k-1) + (1-p)*Win_Streak(n-1,k)
-        return dp[n]
+        dp[(x,y)] = p*Win_Streak(x-1,y-1) + (1-p)*Win_Streak(x-1,k)
+        return dp[(x,y)]
 
 
-print(Win_Streak(n,k))
+Win_Streak(n,k)
 stop = timeit.default_timer()
 execution_time = stop - start
 print("Program Executed in "+str(execution_time))
