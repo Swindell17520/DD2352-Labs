@@ -5,6 +5,7 @@ n = int(input())
 k = int(input())
 p = float(input())
 dp = {}
+start = timeit.default_timer()
 def Win_Streak(n,k):
     if n and k in dp:
         return dp[n][k]
@@ -18,3 +19,6 @@ def Win_Streak(n,k):
 
 
 print(Win_Streak(n,k))
+stop = timeit.default_timer()
+execution_time = stop - start
+print("Program Executed in "+str(execution_time))
