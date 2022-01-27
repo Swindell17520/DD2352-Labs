@@ -4,27 +4,27 @@ Created on Thu Jan 27 14:34:57 2022
 
 @author: Rahul
 """
-import sys
 n = int(input())
 a = int(input())
 b = int(input())
 c = int(input())
-def min(x, y):
-  if x < y:
-    return x
-  return y
 
-def coin_change(f, n, k):
-  M = [0]*(n+1)
+coins = [a, b, c]
 
-  for j in range(1, n+1):
-    mini = float('inf')
 
-    for i in range(1, k+1):
-      if(j >= f[i]):
-        mini = min(mini, 1+M[j-f[i]])
-    M[j] = mini
-  return M[n]
+def Coins(n):
+    dp = [float('inf')] * (n + 1)  # initialize result array with default value inf
+    dp[0] = 0  # base case
+    for amount in range(1, n + 1):
+        for coin in coins:
+            if amount - coin >= 0:
+                # checking if this path is shorter than the other computed before
+                dp[amount] = min(dp[amount], dp[amount-coin] + 1)
+        if dp[amount] == float('inf'):
+            # if no silver/gold/platinum were found...
+            dp[amount] = amount
+    result = dp[-1]
+    return result if result != float('inf') else 0
 
-f = [0,a,b,c]
-print(coin_change(f, n, 3))
+
+print(Coins(n))
