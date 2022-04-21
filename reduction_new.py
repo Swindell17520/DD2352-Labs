@@ -7,25 +7,29 @@ for i in range(E):
     e.append(input().split())
 
 
-def make_adjacency_list(V, E, e):
-    # write code
-    adj_list = ""
-    return adj_list
+def solve_coloring(V, E, m):
 
+    c1 = "1 1\n1 2\n"  # constraint 1, who can play each role
+    c2 = "2 1 3\n2 2 3\n"  # constraint 2, which actors play in same scene
+    n = V + 3  # number of roles ≥ 2
+    s = E + 2  # we set each edge as a scene
+    k = m + 3  # number of actors
 
-adjacency_list = make_adjacency_list(V, E, e)
+    # constraint 1
+    actor_string = str(m)
+    for i in range(3, k + 1):
+        actor_string += " " + str(i)  # add each role so a row looks like "3 1 2 3" if k = 3
+    for i in range(n-2):
+        c1 += actor_string + "\n"  # add a row with the actor string for each role (n roles = # vertices)
+    c1 = c1.rstrip()
 
-
-def solve_coloring(adjacency_list, V, E, m):
-    adj_list = adjacency_list
-    c1 = ""  # constraint 1, who can play each role
-    c2 = ""  # constraint 2, which actors play in same scene
-    n = V  # number of roles ≥ 2
-    s = E  # wer set each edge as a scene
-    k = m  # number of actors same as target colors
+    # constraint 2
+    for i in e:  # we make every edge as a scene
+        c2 += "2 " + str(int(i[0])+2) + " " + str(int(i[1])+2) + "\n"
+    c2 = c2.strip()
 
     return_string = str(n) + "\n" + str(s) + "\n" + str(k) + "\n" + str(c1) + "\n" + str(c2)
     return return_string
 
 
-print(solve_coloring(adjacency_list, V, E, m))
+print(solve_coloring(V, E, m))
